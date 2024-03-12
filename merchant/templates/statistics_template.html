@@ -1,0 +1,50 @@
+{% extends 'layout/layout.html' %}
+{% load static %}
+
+{% block title %}
+    统计
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    各平台总收入(合计{{ total_sales }}￥)
+                </div>
+                <div class="card-body">
+                    <div id="platform_income" style="width: 100%; height: 400px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    最畅销的几个商品
+                </div>
+                <div class="card-body">
+                    <div id="product_sales" style="width: 100%; height: 400px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block JavaScript %}
+<script src="{% static 'js/echarts.js' %}"></script>
+<script>
+    // 使用 JSON 字符串传递数据给 Echarts
+    var echarts_data = {{ echarts_data|safe }};
+    var echarts_data_sales = {{ echarts_data_sales|safe }};
+
+    // 初始化 Echarts 实例
+    var platformChart = echarts.init(document.getElementById('platform_income'));
+    var productChart = echarts.init(document.getElementById('product_sales'));
+
+    // 配置项和数据
+    platformChart.setOption(echarts_data);
+    productChart.setOption(echarts_data_sales);
+</script>
+{% endblock %}

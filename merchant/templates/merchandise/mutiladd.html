@@ -1,0 +1,19 @@
+{% extends 'layout/layout.html' %}
+{% load static %}
+{% block body %}
+<div class="container">
+    <h2 class="mb-4">上传文件</h2>
+    <form  method="post" enctype="multipart/form-data" class="mb-4">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="file" class="form-label">选择文件</label>
+            <input type="file" class="form-control" id="file" name="file" accept=".xlsx">
+        </div>
+        <button type="submit" class="btn btn-primary">上传</button>
+
+        <a href="{% static 'file/商品示例文件.xlsx' %}" class="btn btn-success" download>下载示例文件</a>
+
+    </form>
+
+</div>
+{% endblock %}

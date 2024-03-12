@@ -1,0 +1,35 @@
+{% extends 'layout/layout.html' %}
+{% load static %}
+{% block title %}
+    第三方平台
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <h1 class="mb-4">订单详细信息</h1>
+        <div class="card">
+            <div class="card-header">
+                订单号: {{ order.orderId }}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">第三方平台: {{ order.platform.name }}</h5>
+                <p class="card-text">第三方订单号: {{ order.platform_orderId }}</p>
+                <p class="card-text">收益: {{ order.inaccount }}</p>
+                <p class="card-text">卖出件数: {{ order.amount }}</p>
+            <hr>
+                {% if order.product_source %}
+                    <h5 class="card-title">关联商品源信息:</h5>
+                    <p class="card-text">平台: {{ product.platform.name }}</p>
+                    <p class="card-text">商品uid: {{ product.uuid }}</p>
+                    <p class="card-text">商品链接: <a href="{{ product.url }}" target="_blank">{{ product.url }}</a></p>
+                    <p class="card-text">商品标题: {{ product.title }}</p>
+                    <p class="card-text">进价: {{ product.input_price }}</p>
+                    <p class="card-text">出价: {{ product.output_price }}</p>
+                    <p class="card-text">最低数量: {{ product.min_amount }}</p>
+                    <p class="card-text">邮费: {{ product.postage }}</p>
+                {% else %}
+                    <p class="card-text">该订单没有关联商品源信息。</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
