@@ -8,12 +8,14 @@ WORKDIR /app
 COPY . /app
 
 # 安装项目依赖项
-RUN pip install Django==4.2.11 \
+RUN apt-get update && apt-get install -y libmysqlclient-dev && \
+    pip install Django==4.2.11 \
                 asgiref==3.7.2 \
                 backports.zoneinfo==0.2.1 \
                 et-xmlfile==1.1.0 \
                 openpyxl==3.1.2 \
-                Pillow==8.4.0 \
+                Pillow==10.2.0  \
+                mysqlclient==2.2.4 \
                 sqlparse==0.4.4 \
                 typing-extensions==4.10.0 \
                 tzdata==2024.1 \

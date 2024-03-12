@@ -1,2 +1,15 @@
-/TwoWayMerchant/local_setting.py
-/db.sqlite3
+#pycharm
+.idea/
+.DS_Store
+*.py[cod]
+pycache
+*spy.class
+local_settings.py
+
+#Django stuff:
+*.sqlite3
+media/
+
+#database migrations
+*/migrations/*.py
+!*/migrations/init_·py
