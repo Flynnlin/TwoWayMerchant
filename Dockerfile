@@ -25,8 +25,8 @@ RUN apt-get update && apt-get install -y libmysqlclient-dev && \
 EXPOSE 8000
 
 # 执行数据库迁移命令
-RUN python manage.py makemigrations && \
-    python manage.py migrate
+#RUN python manage.py makemigrations && \
+#    python manage.py migrate
 
 # 设置容器启动时的命令
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

@@ -30,4 +30,8 @@ docker build -t TwoWayMerchant .
 docker run -p 8000:8000 --restart always TwoWayMerchant
 ```
 
-
+```
+# 执行数据库迁移命令
+#  python manage.py makemigrations && \
+#    python manage.py migrate
+```
