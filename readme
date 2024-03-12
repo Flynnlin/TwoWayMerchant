@@ -1,0 +1,17 @@
+# startup
+1. 创建本地配置文件`local_setting.py`,位于TwoWayMerchant下
+```
+#mysql数据库，MySQL 8 or later is required
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.mysql",   #数据库类型
+#         "NAME": "TwoWayMerchant",                        #数据库名
+#         "USER": "ORM",              #用户名
+#         "PASSWORD": "123456",       #密码
+#         "HOST": "127.0.0.1",        #ip
+#         "PORT": "3306",             #端口
+#     }
+# }
+USERNAME = ["1","2"]
+PASSWORD = "123"
+```
