@@ -37,6 +37,9 @@
 
                 </ul>
                 <form class="d-flex">
+                    {% if not request.session.login_status %}
+                        <a class="btn btn-outline-success" href="/user/login/">登录</a>
+                    {% endif %}
 
                 </form>
 
@@ -45,9 +48,6 @@
     </nav>
 
 {%  block body %} {% endblock %}
-
-
-
 
 
 <!-- 导入 Bootstrap JavaScript 文件 -->

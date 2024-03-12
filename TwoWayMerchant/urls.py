@@ -17,11 +17,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.views.generic import RedirectView
 
-from merchant.views import platform_view, statistics
+from merchant.views import platform_view, statistics, user_view
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', RedirectView.as_view(url='/order/')),
     path('platform/',platform_view.platform_list_view),
     path('platform/add/',platform_view.platform_add_view),
     path('platform/delete/<int:pk>/',platform_view.platform_delete_view),
@@ -40,5 +41,8 @@ urlpatterns = [
     path('order/delete/<int:pk>/',platform_view.xhs_order_delete_view),
     # path('/order/mutiladd/')
 
-    path('statistics/',statistics.statistics_view)
+    path('statistics/',statistics.statistics_view),
+
+    path('user/login/',user_view.user_login_view),
+    path('send/logincode/',user_view.img_code_view),
 ]

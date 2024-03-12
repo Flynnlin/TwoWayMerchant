@@ -1,6 +1,7 @@
 
 
 from django import forms
+from django.conf import settings
 
 from merchant.models import PlatformCategory,ProductSource,XhsOrder
 class BootstrapModelForm(forms.ModelForm):
@@ -24,6 +25,27 @@ class BootstrapForm(forms.Form):
             else:
                 field.widget.attrs = {'class':'form-control'}
 
+
+class UserLogin_code_Form(BootstrapForm):
+    username = forms.CharField(max_length=10,required=True)
+    password = forms.CharField(max_length=10, widget=forms.PasswordInput, required=True)
+    captcha = forms.CharField(widget=forms.TextInput,required=True)
+    def user_login(self, request):
+        if self.is_valid():
+            captcha = self.cleaned_data['captcha']
+            if request.session.get('code_txt') != captcha:
+                self.add_error('captcha', '验证码错误或者过期')
+                return False
+            else:
+                password = self.cleaned_data['password']
+                username = self.cleaned_data['username']
+                if password != settings.PASSWORD or username not in settings.USERNAME:
+                    self.add_error('password', '用户名或密码错误')
+                    return False
+                else:
+                    return True
+        else:
+            return False
 class PlatformCategoryForm(BootstrapModelForm):
     class Meta:
         model = PlatformCategory
