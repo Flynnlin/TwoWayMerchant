@@ -8,8 +8,7 @@ WORKDIR /app
 COPY . /app
 
 # 安装项目依赖项
-RUN apt-get update && apt-get install -y libmysqlclient-dev && \
-    pip install Django==4.2.11 \
+RUN pip install Django==4.2.11 \
                 asgiref==3.7.2 \
                 backports.zoneinfo==0.2.1 \
                 et-xmlfile==1.1.0 \
