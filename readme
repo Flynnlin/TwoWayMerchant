@@ -12,6 +12,7 @@
 #         "PORT": "3306",             #端口
 #     }
 # }
+ALLOWED_HOSTS = ['ip']
 USERNAME = ["1","2"]
 PASSWORD = "123"
 ```
@@ -26,8 +27,8 @@ docker run -d --name mysql_8 -e MYSQL_ROOT_PASSWORD=123 -p 3306:3316 --restart a
 ```
 
 ```
-docker build -t TwoWayMerchant .
-docker run -p 8000:8000 --restart always TwoWayMerchant
+docker build -t twowaymerchant .
+docker run -d -p 8000:8000 --restart always twowaymerchant
 ```
 
 ```

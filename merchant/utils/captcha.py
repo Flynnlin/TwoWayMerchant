@@ -1,7 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 import random
 import io
-
+import  os
 def generate_captcha(width=120, height=50, length=4, font_size=50):
     """
     生成验证码图片和验证码字符串
@@ -24,8 +24,12 @@ def generate_captcha(width=120, height=50, length=4, font_size=50):
     image = Image.new('RGB', (width, height), color='white')
     draw = ImageDraw.Draw(image)
 
+    # 获取项目根目录
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    # 指定字体文件的路径
+    FONT_PATH = os.path.join(BASE_DIR, 'static', 'font', 'arial.ttf')
     # 加载字体
-    font = ImageFont.truetype('arial.ttf', font_size)
+    font = ImageFont.truetype(FONT_PATH, font_size)
 
     # 计算文本绘制位置
     text_width, text_height = draw.textbbox((0, 0), captcha_text, font=font)[2:]
