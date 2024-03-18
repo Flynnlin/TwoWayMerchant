@@ -1,0 +1,38 @@
+{% extends 'layout/layout.html' %}
+{% load static %}
+{% block title %}
+    第三方平台
+{% endblock %}
+{% block css %}
+<style>
+        .markdown-img {
+            max-width: 100%; /* 设置图片的最大宽度为父元素的宽度 */
+            max-height: 400px;
+            {#height: auto; /* 高度自动调整，保持图片比例 */#}
+        }
+        .panel {
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        min-height: 300px;
+    }
+    </style>
+{% endblock %}
+{% block body %}
+<div class="card project panel">
+<div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+    <div><h2 class="mb-4">{{ wiki.title }}</h2></div>
+    <div>
+        <a style="text-decoration: none; margin-right: 10px;" href="{% url 'merchandise_wiki_edit_view' wiki.id %}">编辑✏️</a>
+    </div>
+</div>
+    <div class="card-body ">
+            <div class="panel ">
+                <div class="container">
+                        {{ wiki.content|safe }}
+                </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -3,7 +3,9 @@
 from django import forms
 from django.conf import settings
 
-from merchant.models import PlatformCategory,ProductSource,XhsOrder
+from merchant.models import PlatformCategory, ProductSource, XhsOrder, Wiki
+
+
 class BootstrapModelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(BootstrapModelForm, self).__init__(*args, **kwargs)
@@ -74,3 +76,10 @@ class XhsEditOrderForm(BootstrapModelForm):
         if ProductSource.objects.filter(uuid=self.cleaned_data['product_source']).exists():
             return self.cleaned_data['product_source']
         raise forms.ValidationError('商品不存在')
+
+
+class WikiModelForm(BootstrapModelForm):
+    class Meta:
+        model = Wiki
+        fields = "__all__"
+        exclude = ['product']

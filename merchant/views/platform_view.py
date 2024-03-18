@@ -1,9 +1,9 @@
-import uuid
-
+import markdown
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from openpyxl import load_workbook
-from merchant.forms import PlatformCategoryForm, ProductSourceForm, XhsOrderForm, XhsEditOrderForm
-from merchant.models import PlatformCategory, ProductSource, XhsOrder
+from merchant.forms import PlatformCategoryForm, ProductSourceForm, XhsOrderForm, XhsEditOrderForm, WikiModelForm
+from merchant.models import PlatformCategory, ProductSource, XhsOrder, Wiki
 from merchant.utils import uuidStr
 from merchant.utils.pagenation import Pagenation
 
@@ -60,6 +60,7 @@ def merchandise_add_view(request):
         if form.is_valid():
             form.instance.uuid = uuidStr.generate_order_number()
             form.save()
+            Wiki.objects.create(product_id=form.instance.id,title=form.cleaned_data['title'])
             return redirect("/merchandise/")
         else:
             return render(request, 'merchandise/merchandise_add.html',{"form":form})
@@ -79,6 +80,48 @@ def merchandise_edit_view(request, pk):
 def merchandise_delete_view(request, pk):
     delete=ProductSource.objects.get(id=pk).delete()
     return redirect("/merchandise/")
+
+
+def merchandise_wiki_view(request, pk):
+    wiki= Wiki.objects.get(product_id=pk)
+    if wiki.content:
+        extensions = [
+            'extra',
+            'toc',
+            'tables',
+            'codehilite',
+            'fenced_code',
+            'footnotes',
+            'admonition',
+            'attr_list',
+            'def_list',
+            'abbr',
+            'md_in_html',
+            'meta',
+            'nl2br',
+            'sane_lists',
+            'smarty',
+            'wikilinks',
+        ]
+        wiki.content=markdown.markdown(wiki.content,extensions=extensions)
+        print(wiki.content)
+        wiki.content = wiki.content.replace('<img', '<img class="markdown-img"')
+    return render(request, 'merchandise/wiki_show.html',{'wiki':wiki})
+
+def merchandise_wiki_edit_view(request,pk):
+    wiki = Wiki.objects.get(id=pk)
+    if request.method == 'POST':
+        form = WikiModelForm(request.POST, instance=wiki)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse("merchandise_wiki_view",args=[wiki.product.id]))
+        else:
+            return render(request, 'merchandise/wiki_edit.html', {"form":form})
+
+    form = WikiModelForm(instance=wiki)
+    return render(request, 'merchandise/wiki_edit.html', {"form":form})
+
+
 
 
 def xhs_order_list_view(request):

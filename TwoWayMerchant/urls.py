@@ -15,8 +15,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.views.generic import RedirectView
 
 from merchant.views import platform_view, statistics, user_view
@@ -30,9 +32,11 @@ urlpatterns = [
 
     path('merchandise/',platform_view.merchandise_list_view),
     path('merchandise/add/',platform_view.merchandise_add_view),
-    path('merchandise/delete/<int:pk>',platform_view.merchandise_delete_view),
-    path('merchandise/edit/<int:pk>',platform_view.merchandise_edit_view),
+    path('merchandise/delete/<int:pk>/',platform_view.merchandise_delete_view),
+    path('merchandise/edit/<int:pk>/',platform_view.merchandise_edit_view),
     path('merchandise/mutiladd/',platform_view.merchandise_mutiladd),
+    path('merchandise/wiki/<int:pk>/',platform_view.merchandise_wiki_view,name='merchandise_wiki_view'),
+    path('merchandise/wiki/<int:pk>/edit/',platform_view.merchandise_wiki_edit_view,name='merchandise_wiki_edit_view'),
 
     path('order/',platform_view.xhs_order_list_view),
     path('order/add/',platform_view.xhs_order_create_view),
@@ -45,4 +49,8 @@ urlpatterns = [
 
     path('user/login/',user_view.user_login_view),
     path('send/logincode/',user_view.img_code_view),
+
+
+path('mdeditor/', include(('mdeditor.urls', 'mdeditor'), namespace='mdeditor')), # 配置编辑器路由
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

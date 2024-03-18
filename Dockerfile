@@ -18,14 +18,16 @@ RUN pip install Django==4.2.11 \
                 sqlparse==0.4.4 \
                 typing-extensions==4.10.0 \
                 tzdata==2024.1 \
-                wheel==0.43.0
+                wheel==0.43.0 \
+                django-mdeditor==0.1.20  \
+                markdown==3.6 \
 
 # 暴露容器的 8000 端口
 EXPOSE 8000
 
-# 执行数据库迁移命令
-#RUN python manage.py makemigrations && \
-#    python manage.py migrate
+ 执行数据库迁移命令
+RUN python manage.py makemigrations && \
+    python manage.py migrate
 
 # 设置容器启动时的命令
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

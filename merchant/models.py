@@ -1,4 +1,6 @@
 from django.db import models
+from mdeditor.fields import MDTextField
+
 
 # 平台分类
 class PlatformCategory(models.Model):
@@ -33,3 +35,12 @@ class XhsOrder(models.Model):
 
     def __str__(self):
         return self.orderId
+
+
+class Wiki(models.Model):
+    product = models.ForeignKey(verbose_name='商品', to='ProductSource', on_delete=models.CASCADE)
+    title = models.CharField(verbose_name='标题', max_length=32)
+    content =MDTextField(verbose_name='内容', blank=True, null=True)
+
+    def __str__(self):
+        return self.title

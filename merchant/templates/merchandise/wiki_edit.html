@@ -1,0 +1,54 @@
+{% extends 'layout/layout.html' %}
+{% load static %}
+{% block title %}
+    第三方平台
+{% endblock %}
+{% block css %}
+<style>
+    table {
+            width: 100%;
+            border: 3px solid #dee2e6; /* 添加单元格边框 */
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+        th, td {
+            border: 1px solid #842029; /* 添加单元格边框 */
+            padding: 0.5rem;
+            text-align: left;
+        }
+        th {
+            background-color: #f8f9fa;
+        }
+            .markdown-img {
+            max-width: 100%; /* 设置图片的最大宽度为父元素的宽度 */
+            max-height: 400px;
+            {#height: auto; /* 高度自动调整，保持图片比例 */#}
+        }
+        .panel {
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        min-height: 300px;
+    }
+    </style>
+{% endblock %}
+{% block body %}
+<div class="card project panel">
+<div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+    <div><h2 class="mb-4">编辑</h2></div>
+</div>
+    <div class="card-body ">
+            <div class="panel ">
+                <div class="container">
+                        <form action="" method="post" novalidate>
+                            {% csrf_token %}
+                             {{ form.media }}
+                            {{ form.as_p }}
+                            <button type="submit" class="btn btn-primary">提交</button>
+                        </form>
+                </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
