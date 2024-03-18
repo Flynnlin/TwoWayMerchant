@@ -9,24 +9,25 @@ COPY . /app
 
 # 安装项目依赖项
 RUN pip install Django==4.2.11 \
-                asgiref==3.7.2 \
-                backports.zoneinfo==0.2.1 \
-                et-xmlfile==1.1.0 \
-                openpyxl==3.1.2 \
-                Pillow==10.2.0  \
-                mysqlclient==2.2.4 \
-                sqlparse==0.4.4 \
-                typing-extensions==4.10.0 \
-                tzdata==2024.1 \
-                wheel==0.43.0 \
-                django-mdeditor==0.1.20  \
-                markdown==3.6 \
+    asgiref==3.7.2 \
+    backports.zoneinfo==0.2.1 \
+    et-xmlfile==1.1.0 \
+    openpyxl==3.1.2 \
+    Pillow==10.2.0 \
+    mysqlclient==2.2.4 \
+    sqlparse==0.4.4 \
+    typing-extensions==4.10.0 \
+    tzdata==2024.1 \
+    wheel==0.43.0 \
+    django-mdeditor==0.1.20 \
+    markdown==3.6
 
 # 暴露容器的 8000 端口
 EXPOSE 8000
 
 # 执行数据库迁移命令
-RUN python manage.py makemigrations && \
+RUN cd /app/TwoWayMerchant && \
+    python manage.py makemigrations && \
     python manage.py migrate
 
 # 设置容器启动时的命令
