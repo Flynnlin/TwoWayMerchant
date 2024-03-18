@@ -25,7 +25,7 @@ RUN pip install Django==4.2.11 \
 # 暴露容器的 8000 端口
 EXPOSE 8000
 
- 执行数据库迁移命令
+# 执行数据库迁移命令
 RUN python manage.py makemigrations && \
     python manage.py migrate
 
