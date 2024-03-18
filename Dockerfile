@@ -26,8 +26,7 @@ RUN pip install Django==4.2.11 \
 EXPOSE 8000
 
 # 执行数据库迁移命令
-RUN cd /app/TwoWayMerchant && \
-    python manage.py makemigrations && \
+RUN python manage.py makemigrations && \
     python manage.py migrate
 
 # 设置容器启动时的命令
