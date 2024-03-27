@@ -29,14 +29,13 @@
     创建docker容器
     ```
     docker build -t twowaymerchant .
-    docker run -d -p 8000:8000 --restart always twowaymerchant --name=merchant
+    docker run -d -p 8000:8000 --restart always --name=merchant twowaymerchant
     ```
 3. 更新
    ```cmd
    docker stop merchant
    docker rm merchant
-   docker image rm twowaymerchant
    git pull
    docker build -t twowaymerchant .
-   docker run -d -p 8000:8000 --restart always twowaymerchant --name=merchant
+   docker run -d -p 8000:8000 --restart always --name=merchant twowaymerchant
    ```

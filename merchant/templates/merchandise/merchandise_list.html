@@ -43,7 +43,7 @@
                     <tr>
                         <td>{{ m.uuid }}</td>
                         <td>{{ m.platform }}</td>
-                        <td>{{ m.url }}</td>
+                        <td><a href="{{ m.url }}" class="btn btn-link"><span class="fs-4">🔗</span></a></td>
                         <td><a href="{% url 'merchandise_wiki_view' m.id %}">{{ m.title }}👀</a></td>
                         <td>{{ m.input_price }}</td>
                         <td>{{ m.output_price }}</td>
